@@ -1,3 +1,6 @@
+import { ProjectLayout } from '@/components/ProjectLayout'
+import biogenLogo from '@/images/logos/biogen.svg'
+
 export const project = {
   name: 'Biogen Data Visualization Platform',
   description:
@@ -7,7 +10,10 @@ export const project = {
   team: '2 Front-End Engineers, 2 Data Scientists, 1 UX Designer',
   duration: '2016-2017',
   link: 'https://www.biogen.com',
+  logo: biogenLogo,
 }
+
+export default (props) => <ProjectLayout project={project} {...props} />
 
 # Biogen Data Visualization Platform
 

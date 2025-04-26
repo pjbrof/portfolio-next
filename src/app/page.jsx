@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import clsx from 'clsx'
 
 import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
@@ -11,32 +10,7 @@ import logoProjectFinance from '@/images/logos/projectfinance.jpeg'
 import logoJJill from '@/images/logos/jjill.svg'
 import logoBiogen from '@/images/logos/biogen.svg'
 import logoInternet4Associations from '@/images/logos/i4a.png'
-import { getAllArticles } from '@/lib/articles'
 import { getAllProjects } from '@/lib/projects'
-import { formatDate } from '@/lib/formatDate'
-
-function MailIcon(props) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path
-        d="M2.75 7.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
-      />
-      <path
-        d="m4 6 6.024 5.479a2.915 2.915 0 0 0 3.952 0L20 6"
-        className="stroke-zinc-400 dark:stroke-zinc-500"
-      />
-    </svg>
-  )
-}
 
 function BriefcaseIcon(props) {
   return (
@@ -61,6 +35,26 @@ function BriefcaseIcon(props) {
   )
 }
 
+function ComputerDesktopIcon(props) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25"
+        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
+      />
+    </svg>
+  )
+}
+
 function ArrowDownIcon(props) {
   return (
     <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
@@ -74,25 +68,10 @@ function ArrowDownIcon(props) {
   )
 }
 
-function Article({ article }) {
-  return (
-    <Card as="article">
-      <Card.Title href={`/articles/${article.slug}`}>
-        {article.title}
-      </Card.Title>
-      <Card.Eyebrow as="time" dateTime={article.date} decorate>
-        {formatDate(article.date)}
-      </Card.Eyebrow>
-      <Card.Description>{article.description}</Card.Description>
-      <Card.Cta>Read article</Card.Cta>
-    </Card>
-  )
-}
-
 function Project({ project }) {
   return (
-    <Card as="article">
-      <Card.Title href={`/projects/${project.slug}`}>{project.name}</Card.Title>
+    <Card href={`/projects/${project.slug}`}>
+      <Card.Title>{project.name}</Card.Title>
       <Card.Description>{project.description}</Card.Description>
       <Card.Cta>Learn more</Card.Cta>
     </Card>
@@ -104,35 +83,6 @@ function SocialLink({ icon: Icon, ...props }) {
     <Link className="group -m-1 p-1" {...props}>
       <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
     </Link>
-  )
-}
-
-function Newsletter() {
-  return (
-    <form
-      action="/thank-you"
-      className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
-    >
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <MailIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Stay up to date</span>
-      </h2>
-      <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-        Get notified when I publish something new, and unsubscribe at any time.
-      </p>
-      <div className="mt-6 flex">
-        <input
-          type="email"
-          placeholder="Email address"
-          aria-label="Email address"
-          required
-          className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(--spacing(2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 focus:outline-hidden sm:text-sm dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10"
-        />
-        <Button type="submit" className="ml-4 flex-none">
-          Join
-        </Button>
-      </div>
-    </form>
   )
 }
 
@@ -235,57 +185,32 @@ function Resume() {
         ))}
       </ol>
       <Button
-        href="/resume.pdf"
+        href="/patrick_brophy_resume.pdf"
         variant="secondary"
         className="group mt-6 w-full"
         download
         target="_blank"
       >
-        Download CV
+        Download Resume
         <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
       </Button>
     </div>
   )
 }
 
-function Photos() {
-  let rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
-
-  return (
-    <div className="mt-16 sm:mt-20">
-      <div className="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
-        {[image1, image2, image3, image4, image5].map((image, imageIndex) => (
-          <div
-            key={image.src}
-            className={clsx(
-              'relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl dark:bg-zinc-800',
-              rotations[imageIndex % rotations.length],
-            )}
-          >
-            <Image
-              src={image}
-              alt=""
-              sizes="(min-width: 640px) 18rem, 11rem"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
 export default async function Home() {
-  let articles = (await getAllArticles()).slice(0, 4)
   let projects = await getAllProjects()
   return (
     <>
       <Container className="mt-9">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            Front-End Engineer
+            Patrick Brophy
           </h1>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+          <h2 className="dark:text-zinc-00 text-2xl font-bold tracking-tight text-zinc-500 uppercase">
+            Front-End Engineer
+          </h2>
+          <p className="mt-6 text-base text-zinc-500 dark:text-zinc-100">
             With over 10 years of experience in FinTech, e-commerce, and Pharma
             industries, I specialize in scalable design systems, UI/UX,
             accessibility, and animation. Proficient in React and Vue, I build
@@ -313,13 +238,23 @@ export default async function Home() {
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-x-8 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">
             <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
-              <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+              <h2 className="mb-8 flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+                <ComputerDesktopIcon className="h-6 w-6 flex-none" />
                 <span className="ml-3">Projects</span>
               </h2>
+              {projects.map((project, index) => (
+                <>
+                  <Project key={project.slug} project={project} />
+                  <div className="h-6" />
+                  {index !== projects.length - 1 && (
+                    <>
+                      <hr className="text-zinc-300" />
+                      <div className="h-6" />
+                    </>
+                  )}
+                </>
+              ))}
             </div>
-            {projects.map((project) => (
-              <Project key={project.slug} project={project} />
-            ))}
           </div>
 
           <Resume />

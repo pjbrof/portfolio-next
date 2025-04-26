@@ -1,3 +1,6 @@
+import { ProjectLayout } from '@/components/ProjectLayout'
+import logoJohnHancock from '@/images/logos/jh.svg'
+
 export const project = {
   name: 'John Hancock Site Redesign',
   description:
@@ -13,7 +16,10 @@ export const project = {
   team: '4 Front-End Engineers, 2 Back-End Engineers, 1 UX Designer, 1 Product Manager',
   duration: '2020-2021',
   link: 'https://www.johnhancock.com',
+  logo: logoJohnHancock,
 }
+
+export default (props) => <ProjectLayout project={project} {...props} />
 
 # John Hancock Corporate Website Redesign
 
