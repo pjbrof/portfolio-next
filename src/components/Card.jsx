@@ -21,7 +21,7 @@ export function Card({ as, className, children, href }) {
     <Component
       className={clsx(className, 'group relative flex flex-col items-start')}
     >
-      <Link href={href}>{children}</Link>
+      <Link href={href ?? ''}>{children}</Link>
     </Component>
   )
 }
